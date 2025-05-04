@@ -6,9 +6,9 @@ export function About() {
         <div className="max-w-4xl mx-auto text-center">
           <h3 className="text-3xl md:text-5xl font-bold mb-6">About SpendTaskify</h3>
           <p className="text-lg text-[#B7E4C7]">
-          SpendTaskify is your personal finance companion. We help you stay on track with daily spending, budget your income, and reach your financial goals. With simplicity, security, and smart tools, you take control of your finances—every day.
+            SpendTaskify is your all-in-one financial and task management app. Seamlessly track your daily income and expenses while staying organized with your to-dos. Take control of your budget, make smarter financial decisions, and achieve your personal and professional goals with ease—all in one place.
           </p>
         </div>
       </section>
     );
-  }
+}
