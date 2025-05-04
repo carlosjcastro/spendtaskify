@@ -151,7 +151,7 @@ const TaskModal = ({ onClose, onSaved, task }) => {
     <div className="fixed inset-0 bg-black/40 bg-opacity-30 backdrop-blur-sm flex justify-center items-center z-50">
       <form
         onSubmit={handleSave}
-        className="bg-white p-6 rounded-2xl w-full max-w-md space-y-4"
+        className="bg-white p-8 rounded-2xl w-full max-w-md md:max-w-lg sm:max-w-sm px-4 sm:px-6 space-y-4"
       >
         <h2 className="text-xl font-bold">
           {task ? "Editar Tarea" : "Agregar Tarea"}
