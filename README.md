@@ -1,7 +1,5 @@
 # 💸 SpendTaskify – Financial & Task Organizer 📅
 
-![SpendTaskify Banner](https://your-image-url.com/banner.png)
-
 <p align="center">
   <img src="https://img.shields.io/badge/Status-In%20Progress-yellow?style=flat-square" />
   <img src="https://img.shields.io/badge/Frontend-ReactJS-blue?style=flat-square&logo=react" />
