@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../../supabaseClient";
-import { FiSave, FiTrash2 } from "react-icons/fi";
+import { FiSave } from "react-icons/fi";
 
 export default function Profile() {
   const [user, setUser] = useState(null);
