@@ -73,7 +73,7 @@ export default function Profile() {
         .from("avatars")
         .upload(filePath, fotoPerfil);
 
-      // Verificamos la respuesta de la subida
+      // Se verifica si hubo un error al subir la imagen
       if (uploadError) {
         console.error("Error al subir la imagen:", uploadError);
         setMensaje("❌ Error al subir imagen: " + uploadError.message);
@@ -86,7 +86,7 @@ export default function Profile() {
       const filePathRelative = data.path;
       console.log("Path relativo de la imagen subida:", filePathRelative);
 
-      // Construir la URL pública directamente
+      // Esto es para obtener la URL pública del archivo subido
       const publicUrl = `https://oyxzajcawnadddsfohez.supabase.co/storage/v1/object/public/avatars/${filePathRelative}`;
       console.log("Probando URL pública directa:", publicUrl);
 
@@ -103,7 +103,7 @@ export default function Profile() {
       }
     }
 
-    // Verifica que la URL de la foto se haya asignado correctamente
+    // Se verifica que la URL de la foto se haya asignado correctamente
     if (!fotoUrl) {
       setMensaje("❌ No se ha asignado una URL de foto válida.");
       setLoading(false);
@@ -167,8 +167,11 @@ export default function Profile() {
         </div>
 
         <div className="mb-6 text-center">
-          <label className="block text-sm sm:text-base mb-2 font-medium">
-            Foto de perfil
+          <label
+            htmlFor="fileInput"
+            className="text-white bg-[#2C3E50] p-2 rounded-2xl cursor-pointer hover:bg-[#34495E] focus:outline-none"
+          >
+            {fotoPerfil ? fotoPerfil.name : "Seleccionar archivo"}
           </label>
           {previewUrl && (
             <img
@@ -178,21 +181,18 @@ export default function Profile() {
             />
           )}
           <input
+            id="fileInput"
             type="file"
             accept="image/*"
             onChange={(e) => {
               setFotoPerfil(e.target.files[0]);
               setPreviewUrl(URL.createObjectURL(e.target.files[0]));
             }}
-            className="text-white bg-[#2C3E50] p-2 rounded-2xl cursor-pointer hover:bg-[#34495E] focus:outline-none"
+            className="hidden"
           />
         </div>
 
-        {mensaje && (
-          <div className="mb-6 bg-green-500 text-white p-3 rounded animate-pulse">
-            {mensaje}
-          </div>
-        )}
+        {mensaje && <div className="text-[#ffffff] mb-6 p-3">{mensaje}</div>}
 
         <div className="flex flex-col sm:flex-row justify-between items-center mt-6 space-y-4 sm:space-y-0 sm:space-x-4">
           <button
@@ -235,59 +235,8 @@ export default function Profile() {
               </span>
             )}
           </button>
-          {/* 
-          <button
-            onClick={handleDeleteAccount}
-            className="border-2 border-[#ef233c] px-6 py-3 rounded-full text-white hover:bg-[#ef233c] w-full sm:w-auto transition duration-300 cursor-pointer"
-          >
-            <span className="flex items-center space-x-2">
-              <FiTrash2 className="h-5 w-5" />
-              <span>Eliminar Cuenta</span>
-            </span>
-          </button> */}
         </div>
       </div>
-      {/* {mostrarModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-          <div className="bg-[#1A242F] text-white rounded-lg p-6 shadow-xl max-w-sm w-full">
-            <h2 className="text-xl font-semibold mb-4">¿Eliminar cuenta?</h2>
-            <p className="mb-6 text-sm">
-              Esta acción no se puede deshacer. ¿Estás seguro de que deseas
-              continuar?
-            </p>
-            <div className="flex justify-end space-x-4">
-              <button
-                onClick={() => setMostrarModal(false)}
-                className="px-4 py-2 bg-gray-500 rounded-full hover:bg-gray-600 transition duration-300 cursor-pointer"
-              >
-                Cancelar
-              </button>
-              <button
-                onClick={async () => {
-                  const { error: deleteError } = await supabase
-                    .from("profiles")
-                    .delete()
-                    .eq("id", user.id);
-                  if (deleteError) {
-                    console.error("Error al eliminar cuenta:", deleteError);
-                    setMensaje(
-                      "❌ Error al eliminar cuenta: " + deleteError.message
-                    );
-                    setMostrarModal(false);
-                    return;
-                  }
-                  await supabase.auth.signOut();
-                  setMensaje("✅ Cuenta eliminada y sesión cerrada.");
-                  setMostrarModal(false);
-                }}
-                className="px-4 py-2 bg-[#ef233c] rounded-full transition duration-300 cursor-pointer"
-              >
-                Eliminar
-              </button>
-            </div>
-          </div>
-        </div>
-      )} */}
     </div>
   );
 }

@@ -14,7 +14,7 @@ const DashboardHeader = () => {
   // Detectar redimensionamiento de pantalla para cerrar el menú móvil en desktop
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 768) setMenuOpen(false); // Cierra el menú en desktop
+      if (window.innerWidth >= 768) setMenuOpen(false);
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -37,7 +37,7 @@ const DashboardHeader = () => {
             .select("avatar_url")
             .eq("id", user.id)
             .single();
-          setAvatarUrl(data?.avatar_url || "https://via.placeholder.com/40");
+          setAvatarUrl(data?.avatar_url || "/src/assets/img/happy.png");
         }
       }
     };
@@ -70,7 +70,7 @@ const DashboardHeader = () => {
         {/* Botón hamburguesa */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden text-base font-semibold px-4 py-2 bg-[#223344] rounded-md shadow-sm hover:bg-[#2c3e50] transition"
+          className="md:hidden text-base font-semibold px-4 py-2 bg-[#223344] rounded-md shadow-sm hover:bg-[#2c3e50] transition duration-300 cursor-pointer"
         >
           {menuOpen ? "Cerrar ✖" : "Menú ☰"}
         </button>
@@ -105,7 +105,7 @@ const DashboardHeader = () => {
                   </Link>
                   <button
                     onClick={handleLogout}
-                    className="flex text-[#FFB4A2] items-center w-full px-4 py-2 hover:bg-[#223344] transition text-left"
+                    className="flex text-[#FFB4A2] items-center w-full px-4 py-2 hover:bg-[#223344] transition text-left cursor-pointer"
                   >
                     <FiLogOut className="mr-2" />
                     Cerrar sesión
