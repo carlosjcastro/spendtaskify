@@ -136,7 +136,7 @@ export default function Profile() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-[#0F1B24] px-4">
+    <div className="flex justify-center items-center min-h-screen bg-[#0d1b2a] px-4">
       <div className="max-w-full sm:max-w-4xl w-full mx-auto p-6 sm:p-8 bg-[#1A242F] text-white rounded-2xl animate-fade-in">
         <h2 className="text-2xl sm:text-3xl font-semibold mb-6 text-center">
           Perfil de Usuario

@@ -120,7 +120,7 @@ export default function Register() {
         <h2 className="text-3xl font-bold text-center mb-6 text-[#ffffff]">Create Account</h2>
 
         {submissionError && (
-          <div className="mb-4 text-sm text-[#FFB4A2] text-center">{submissionError}</div>
+          <div className="mb-4 text-sm text-[#ef233c] text-center">{submissionError}</div>
         )}
 
         {successMessage && (
@@ -130,7 +130,7 @@ export default function Register() {
         {/* Email */}
         <div className="mb-6">
           <label htmlFor="email" className="block text-sm mb-2">Email</label>
-          <div className={`${inputWrapperStyles} ${errors.email ? 'border-[#FFB4A2]' : 'border-[#95D5B2]'} focus-within:ring-[#52B788]`}>
+          <div className={`${inputWrapperStyles} ${errors.email ? 'border-[#ef233c]' : 'border-[#95D5B2]'} focus-within:ring-[#52B788]`}>
             <FaUserAlt className="text-[#95D5B2] mr-3" />
             <input
               id="email"
@@ -143,14 +143,14 @@ export default function Register() {
             />
           </div>
           {errors.email && (
-            <FormHelperText style={{ color: '#FFB4A2', marginLeft: '0.25rem' }}>{errors.email}</FormHelperText>
+            <FormHelperText style={{ color: '#ef233c', marginLeft: '0.25rem' }}>{errors.email}</FormHelperText>
           )}
         </div>
 
         {/* Password */}
         <div className="mb-6">
           <label htmlFor="password" className="block text-sm mb-2">Password</label>
-          <div className={`${inputWrapperStyles} ${errors.password ? 'border-[#FFB4A2]' : 'border-[#95D5B2]'} focus-within:ring-[#52B788]`}>
+          <div className={`${inputWrapperStyles} ${errors.password ? 'border-[#ef233c]' : 'border-[#95D5B2]'} focus-within:ring-[#52B788]`}>
             <FaLock className="text-[#95D5B2] mr-3" />
             <input
               id="password"
@@ -163,7 +163,7 @@ export default function Register() {
             />
           </div>
           {errors.password && (
-            <FormHelperText style={{ color: '#FFB4A2', marginLeft: '0.25rem' }}>{errors.password}</FormHelperText>
+            <FormHelperText style={{ color: '#ef233c', marginLeft: '0.25rem' }}>{errors.password}</FormHelperText>
           )}
 
           {password && (
@@ -188,19 +188,19 @@ export default function Register() {
           )}
 
           <ul className="mt-3 text-sm text-[#74C69D]">
-            <li className={requirements.hasUpperCase ? 'text-[#74C69D]' : 'text-red-500'}>
+            <li className={requirements.hasUpperCase ? 'text-[#74C69D]' : 'text-[#ef233c]'}>
               {requirements.hasUpperCase ? '✔️ At least one uppercase letter' : '❌ At least one uppercase letter'}
             </li>
-            <li className={requirements.hasNumber ? 'text-[#74C69D]' : 'text-red-500'}>
+            <li className={requirements.hasNumber ? 'text-[#74C69D]' : 'text-[#ef233c]'}>
               {requirements.hasNumber ? '✔️ At least one number' : '❌ At least one number'}
             </li>
-            <li className={requirements.hasSpecialChar ? 'text-[#74C69D]' : 'text-red-500'}>
+            <li className={requirements.hasSpecialChar ? 'text-[#74C69D]' : 'text-[#ef233c]'}>
               {requirements.hasSpecialChar ? '✔️ At least one special character' : '❌ At least one special character'}
             </li>
-            <li className={requirements.length ? 'text-[#74C69D]' : 'text-red-500'}>
+            <li className={requirements.length ? 'text-[#74C69D]' : 'text-[#ef233c]'}>
               {requirements.length ? '✔️ At least 8 characters' : '❌ At least 8 characters'}
             </li>
-            <li className={requirements.longLength ? 'text-[#74C69D]' : 'text-red-500'}>
+            <li className={requirements.longLength ? 'text-[#74C69D]' : 'text-[#ef233c]'}>
               {requirements.longLength ? '✔️ At least 12 characters' : '❌ At least 12 characters'}
             </li>
           </ul>
@@ -209,7 +209,7 @@ export default function Register() {
         {/* Confirm Password */}
         <div className="mb-6">
           <label htmlFor="confirmPassword" className="block text-sm mb-2">Confirm Password</label>
-          <div className={`${inputWrapperStyles} ${errors.confirmPassword ? 'border-[#FFB4A2]' : 'border-[#95D5B2]'} focus-within:ring-[#52B788]`}>
+          <div className={`${inputWrapperStyles} ${errors.confirmPassword ? 'border-[#ef233c]' : 'border-[#95D5B2]'} focus-within:ring-[#52B788]`}>
             <FaLock className="text-[#95D5B2] mr-3" />
             <input
               id="confirmPassword"
@@ -222,14 +222,14 @@ export default function Register() {
             />
           </div>
           {errors.confirmPassword && (
-            <FormHelperText style={{ color: '#FFB4A2', marginLeft: '0.25rem' }}>{errors.confirmPassword}</FormHelperText>
+            <FormHelperText style={{ color: '#ef233c', marginLeft: '0.25rem' }}>{errors.confirmPassword}</FormHelperText>
           )}
         </div>
 
         {/* Submit */}
         <button
           type="submit"
-          className="w-full bg-[#52B788] hover:bg-[#2a7d54] text-white py-2 px-4 rounded-2xl transition-all"
+          className="w-full bg-[#52B788] text-[#081C15] py-3 rounded-full font-semibold hover:bg-[#40916C] transition-colors cursor-pointer"
         >
           Register
         </button>

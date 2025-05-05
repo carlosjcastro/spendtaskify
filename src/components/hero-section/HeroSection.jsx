@@ -37,7 +37,7 @@ export default function Hero() {
 
       <div className="text-center mt-10">
         <Link
-          to="/login"
+          to="/register"
           className="bg-[#52B788] hover:bg-[#40916C] text-[#081C15] px-6 py-3 rounded-full font-semibold transition-colors"
         >
           Get Started

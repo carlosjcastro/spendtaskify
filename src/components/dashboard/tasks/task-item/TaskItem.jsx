@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import SubTaskItem from "../subtask-item/SubTaskItem";
 import ProgressBar from "../progress-bar/ProgressBar";
 import TaskControls from "../task-controls/TaskControls";
+import { FaCheckCircle } from "react-icons/fa";
 
 const TaskItem = ({ task, onEdit, onDelete }) => {
-  const isCompleted = task.status === "completado";
+  const isCompleted = task.status === "Completado";
   const endDate = new Date(task.end_date);
   const now = new Date();
   const diffInDays = Math.floor((endDate - now) / (1000 * 60 * 60 * 24));
@@ -29,12 +30,16 @@ const TaskItem = ({ task, onEdit, onDelete }) => {
   };
 
   return (
-    <div className="bg-[#1A242F] rounded-2xl p-4 transition-all duration-300">
+    <div
+      className={`bg-[#1A242F] rounded-2xl p-4 transition-all duration-300 ${
+        isCompleted ? "bg-[#001524]" : ""
+      }`}
+    >
       <div className="flex justify-between items-start">
         <div className="flex-1">
           <h2
             className={`text-[#ffffff] text-lg font-semibold ${
-              isCompleted ? "line-through text-[#52B788]" : ""
+              isCompleted ? "line-through text-[#000000]" : ""
             }`}
           >
             {task.title}
@@ -52,12 +57,20 @@ const TaskItem = ({ task, onEdit, onDelete }) => {
 
           <div
             className={`mt-2 inline-block px-2 py-1 rounded-2xl text-xs font-semibold uppercase tracking-wide bg-opacity-70 ${
-              statusColors[task.status] || "bg-[#52B788] text-[#ffffff]"
+              statusColors[task.status] || "bg-[#52B788] text-white"
             }`}
           >
             {task.status}
           </div>
         </div>
+
+        {/* Ícono de check solo si la tarea está completada */}
+        {isCompleted && (
+          <FaCheckCircle
+            title="Tarea completada"
+            className="text-[#52B788] text-sm mr-4"
+          />
+        )}
 
         <TaskControls task={task} onEdit={onEdit} onDelete={onDelete} />
       </div>
@@ -72,6 +85,48 @@ const TaskItem = ({ task, onEdit, onDelete }) => {
           </div>
         </div>
       )}
+    </div>
+  );
+};
+
+// Filtro para tareas nuevas y antiguas
+const TaskList = ({ tasks, onEdit, onDelete }) => {
+  const [filter, setFilter] = useState("newest"); // Por defecto, mostrar las más nuevas
+
+  const sortedTasks = tasks.sort((a, b) => {
+    const dateA = new Date(a.start_date);
+    const dateB = new Date(b.start_date);
+
+    if (filter === "newest") {
+      return dateB - dateA; // Ordenar de más reciente a más antiguo
+    } else {
+      return dateA - dateB; // Ordenar de más antiguo a más reciente
+    }
+  });
+
+  return (
+    <div>
+      {/* Filtro de tareas */}
+      <div className="mb-4 flex justify-end">
+        <select
+          className="p-2 border border-gray-300 rounded-lg"
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+        >
+          <option value="newest">Tareas Nuevas</option>
+          <option value="oldest">Tareas Antiguas</option>
+        </select>
+      </div>
+
+      {/* Lista de tareas */}
+      {sortedTasks.map((task) => (
+        <TaskItem
+          key={task.id}
+          task={task}
+          onEdit={onEdit}
+          onDelete={onDelete}
+        />
+      ))}
     </div>
   );
 };

@@ -11,7 +11,6 @@ const DashboardHeader = () => {
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
 
-  // Detectar redimensionamiento de pantalla para cerrar el menú móvil en desktop
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) setMenuOpen(false);
@@ -20,7 +19,6 @@ const DashboardHeader = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Obtener usuario y avatar
   useEffect(() => {
     const getUser = async () => {
       const {
@@ -67,7 +65,6 @@ const DashboardHeader = () => {
           <h1 className="text-2xl font-bold">Dashboard</h1>
         </Link>
 
-        {/* Botón hamburguesa */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className="md:hidden text-base font-semibold px-4 py-2 bg-[#223344] rounded-md shadow-sm hover:bg-[#2c3e50] transition duration-300 cursor-pointer"
@@ -75,7 +72,6 @@ const DashboardHeader = () => {
           {menuOpen ? "Cerrar ✖" : "Menú ☰"}
         </button>
 
-        {/* Usuario (desktop) */}
         {user && (
           <div className="hidden md:flex items-center space-x-4 ml-6 mr-6">
             <div className="relative">
@@ -120,7 +116,6 @@ const DashboardHeader = () => {
       {/* Menú móvil */}
       {menuOpen && user && (
         <div className="fixed inset-0 bg-[#0d1b2a]/90 backdrop-blur-sm z-40 flex flex-col items-center justify-center space-y-8 transition-all duration-500 animate-slide-in">
-          {/* Botón de cierre */}
           <button
             onClick={() => setMenuOpen(false)}
             className="absolute top-4 right-4 text-2xl text-white"
@@ -128,26 +123,29 @@ const DashboardHeader = () => {
             ✖
           </button>
 
-          <button
-            onClick={() => {
-              setMenuOpen(false);
-              navigate("/dashboard/profile");
-            }}
-            className="flex items-center text-xl px-6 py-4 rounded-md hover:bg-[#223344] transition"
-          >
-            <FiUser className="mr-2" />
-            Cuenta
-          </button>
-          <button
-            onClick={() => {
-              setMenuOpen(false);
-              handleLogout();
-            }}
-            className="flex items-center text-xl px-6 py-4 rounded-md text-[#FFB4A2] hover:bg-[#223344] transition"
-          >
-            <FiLogOut className="mr-2" />
-            Cerrar sesión
-          </button>
+          {/* Botones centrados y alineados */}
+          <div className="w-full flex flex-col items-center">
+            <button
+              onClick={() => {
+                setMenuOpen(false);
+                navigate("/dashboard/profile");
+              }}
+              className="flex items-center text-xl px-6 py-4 mb-4 rounded-2xl hover:bg-[#223344] transition w-11/12 sm:w-1/2 justify-center text-center cursor-pointer"
+            >
+              <FiUser className="mr-2" />
+              Cuenta
+            </button>
+            <button
+              onClick={() => {
+                setMenuOpen(false);
+                handleLogout();
+              }}
+              className="flex items-center text-xl px-6 py-4 rounded-2xl text-[#FFB4A2] hover:bg-[#223344] transition w-11/12 sm:w-1/2 justify-center text-center cursor-pointer"
+            >
+              <FiLogOut className="mr-2" />
+              Cerrar sesión
+            </button>
+          </div>
         </div>
       )}
     </header>

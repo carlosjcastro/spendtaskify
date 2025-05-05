@@ -54,7 +54,6 @@ export default function Login() {
 
     if (Object.keys(newErrors).length > 0) return;
 
-    // Intentar iniciar sesión con Supabase
     const { error } = await supabase.auth.signInWithPassword({
       email: sanitizedEmail,
       password: sanitizedPassword,
@@ -65,7 +64,7 @@ export default function Login() {
     } else {
       lastSubmitTimeRef.current = now;
       setSuccessMessage('Logged in successfully!');
-      setTimeout(() => navigate('/dashboard'), 1000); // Redirige al dashboard o a donde quieras
+      setTimeout(() => navigate('/dashboard'), 1000);
     }
   };
 
@@ -80,7 +79,7 @@ export default function Login() {
 
         {/* Submission error */}
         {submissionError && (
-          <div className="mb-4 text-sm text-[#FFB4A2] text-center">
+          <div className="mb-4 text-sm text-[#ef233c] text-center">
             {submissionError}
           </div>
         )}
@@ -95,7 +94,7 @@ export default function Login() {
         {/* Email */}
         <div className="mb-6">
           <label htmlFor="email" className="block text-sm mb-2">Email</label>
-          <div className={`${inputWrapperStyles} ${errors.email ? 'border-[#FFB4A2]' : 'border-[#95D5B2]'} focus-within:ring-[#52B788]`}>
+          <div className={`${inputWrapperStyles} ${errors.email ? 'border-[#ef233c]' : 'border-[#95D5B2]'} focus-within:ring-[#52B788]`}>
             <FaUserAlt className="text-[#95D5B2] mr-3" />
             <input
               id="email"
@@ -108,7 +107,7 @@ export default function Login() {
             />
           </div>
           {errors.email && (
-            <FormHelperText style={{ color: '#FFB4A2', marginLeft: '0.25rem' }}>
+            <FormHelperText style={{ color: '#ef233c', marginLeft: '0.25rem' }}>
               {errors.email}
             </FormHelperText>
           )}
@@ -117,7 +116,7 @@ export default function Login() {
         {/* Password */}
         <div className="mb-6">
           <label htmlFor="password" className="block text-sm mb-2">Password</label>
-          <div className={`${inputWrapperStyles} ${errors.password ? 'border-[#FFB4A2]' : 'border-[#95D5B2]'} focus-within:ring-[#52B788]`}>
+          <div className={`${inputWrapperStyles} ${errors.password ? 'border-[#ef233c]' : 'border-[#95D5B2]'} focus-within:ring-[#52B788]`}>
             <FaLock className="text-[#95D5B2] mr-3" />
             <input
               id="password"
@@ -130,7 +129,7 @@ export default function Login() {
             />
           </div>
           {errors.password && (
-            <FormHelperText style={{ color: '#FFB4A2', marginLeft: '0.25rem' }}>
+            <FormHelperText style={{ color: '#ef233c', marginLeft: '0.25rem' }}>
               {errors.password}
             </FormHelperText>
           )}
@@ -138,7 +137,7 @@ export default function Login() {
 
         <button
           type="submit"
-          className="w-full bg-[#52B788] text-[#081C15] py-3 rounded-xl font-semibold hover:bg-[#40916C] transition-colors"
+          className="w-full bg-[#52B788] text-[#081C15] py-3 rounded-full font-semibold hover:bg-[#40916C] transition-colors cursor-pointer"
         >
           Log In
         </button> 
