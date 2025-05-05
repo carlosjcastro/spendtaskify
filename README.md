@@ -74,6 +74,7 @@ git clone https://github.com/yourusername/spendtaskify.git
 cd spendtaskify
 npm install
 npm run dev
+```
 
 ## 📌 Autor
 
