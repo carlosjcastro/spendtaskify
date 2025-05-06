@@ -1,4 +1,4 @@
-# 💸 SpendTaskify – Financial & Task Organizer 📅
+# 💸 SpendTaskify Hub – Personal Organizer for Finances, Tasks & Grades 📚
 
 <p align="center">
   <img src="https://img.shields.io/badge/Status-In%20Progress-yellow?style=flat-square" />
@@ -11,16 +11,17 @@
 
 ## 🌍 English
 
-**SpendTaskify** is a minimalist and responsive web application that helps you track your 💵 expenses, 💰 income, and 📌 daily tasks in one place.
+**SpendTaskify Hub** is a minimalist and responsive web app that helps you organize your **daily finances**, **tasks**, and **academic progress** all in one place.
 
 ### 🔧 Features
 
-- ✅ Add, edit, delete tasks  
-- 💼 Track your income and expenses  
-- 📊 Real-time summary and balance  
-- 🔍 Filter tasks by status or date  
-- ☁️ All data stored in [Supabase](https://supabase.io/)  
-- 📱 Responsive design with [Tailwind CSS](https://tailwindcss.com/)
+- ✅ Add, edit, and delete daily tasks  
+- 💼 Track personal expenses and income  
+- 📝 Manage your academic notes and grades  
+- 📊 Real-time balance and performance summary  
+- 🔍 Filter tasks and notes by status or date  
+- ☁️ Cloud data storage with [Supabase](https://supabase.io/)  
+- 📱 Responsive design using [Tailwind CSS](https://tailwindcss.com/)
 
 ### 🚀 Technologies
 
@@ -32,49 +33,43 @@
 ### 📦 Setup Instructions
 
 ```bash
-git clone https://github.com/yourusername/spendtaskify.git
-cd spendtaskify
+git clone https://github.com/yourusername/spendtaskify-hub.git
+cd spendtaskify-hub
 npm install
 npm run dev
 ```
 
 ## 🌐 Español
 
-**SpendTaskify** es una aplicación web minimalista y responsiva que te ayuda a gestionar tus 💵 gastos, 💰 ingresos y 📌 tareas diarias desde un solo lugar.
+**SpendTaskify Hub** es una aplicación web minimalista y responsiva que te permite organizar tus gastos diarios, tareas personales y notas académicas en un solo lugar.
 
 ---
 
 ### 🔧 Funcionalidades
 
-- ✅ Agregar, editar, eliminar tareas  
-- 💼 Registrar ingresos y egresos  
-- 📊 Resumen y balance en tiempo real  
-- 🔍 Filtrar tareas por estado o fecha  
-- ☁️ Datos almacenados en Supabase  
-- 📱 Diseño responsive con Tailwind CSS  
+- ✅ Agregar, editar y eliminar tareas  
+- 💼 Registrar ingresos y gastos personales  
+- 📝 Gestionar tus notas académicas y calificaciones  
+- 📊 Resumen de balances y progreso en tiempo real  
+- 🔍 Filtrar tareas y notas por estado o fecha  
+- ☁️ Almacenamiento de datos en la nube con Supabase  
+- 📱 Diseño adaptable con Tailwind CSS  
 
 ---
 
 ### 🚀 Tecnologías
 
-- ⚛️ React + Vite  
-- 💨 Tailwind CSS  
-- 🛢️ Supabase  
-- 🧠 React Context API  
+- ⚛️ **React** + **Vite**  
+- 💨 **Tailwind CSS**  
+- 🛢️ **Supabase**  
+- 🧠 **React Context API**
 
 ---
-
 
 ### 📦 Instrucciones de instalación
 
 ```bash
-git clone https://github.com/yourusername/spendtaskify.git
-cd spendtaskify
+git clone https://github.com/yourusername/spendtaskify-hub.git
+cd spendtaskify-hub
 npm install
 npm run dev
-```
-
-## 📌 Autor
-
-**SpendTaskify** by Carlos José Castro Galante 🚀 
-
