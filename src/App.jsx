@@ -15,12 +15,13 @@ import Finanzas from './pages/finances/Finances';
 import PrivateRoute from './hook/private-route/PrivateRoute';
 import Profile from './pages/profile/Profile';
 import Tasks from './pages/tasks/Tasks';
+import ResetPassword from './pages/reset-password/ResetPassword';
 
 function AppContent() {
   const location = useLocation();
 
   const isDashboardRoute = location.pathname.startsWith('/dashboard');
-  const isAuthRoute = location.pathname.startsWith('/login') || location.pathname.startsWith('/register');
+  const isAuthRoute = location.pathname.startsWith('/login') || location.pathname.startsWith('/register') || location.pathname.startsWith('/reset-password');
 
   return (
     <>
@@ -48,6 +49,7 @@ function AppContent() {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
 
         {/* 👇 Rutas protegidas */}
         <Route

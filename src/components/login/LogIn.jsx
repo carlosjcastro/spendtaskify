@@ -1,53 +1,55 @@
-import React, { useState, useRef } from 'react';
-import { FormHelperText } from '@mui/material';
-import { FaUserAlt, FaLock } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
-import { supabase } from '../../supabaseClient'
+import React, { useState, useRef } from "react";
+import { FormHelperText } from "@mui/material";
+import { FaUserAlt, FaLock } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import { supabase } from "../../supabaseClient";
+import { IoIosArrowRoundBack } from "react-icons/io";
 
-const commonPasswords = ['123456', 'password', '12345678', 'qwerty', 'abc123'];
+const commonPasswords = ["123456", "password", "12345678", "qwerty", "abc123"];
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState({ email: '', password: '' });
-  const [successMessage, setSuccessMessage] = useState('');
-  const [submissionError, setSubmissionError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({ email: "", password: "" });
+  const [successMessage, setSuccessMessage] = useState("");
+  const [submissionError, setSubmissionError] = useState("");
   const lastSubmitTimeRef = useRef(0);
   const navigate = useNavigate();
 
-  const sanitizeInput = (input) => input.replace(/[<>/"'`;]/g, '');
+  const sanitizeInput = (input) => input.replace(/[<>/"'`;]/g, "");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const now = Date.now();
     const newErrors = {};
-    setSuccessMessage('');
-    setSubmissionError('');
+    setSuccessMessage("");
+    setSubmissionError("");
 
     const sanitizedEmail = sanitizeInput(email.trim());
     const sanitizedPassword = sanitizeInput(password);
 
     if (now - lastSubmitTimeRef.current < 3000) {
-      setSubmissionError('Please wait a few seconds before trying again.');
+      setSubmissionError("Please wait a few seconds before trying again.");
       return;
     }
 
     if (!sanitizedEmail) {
-      newErrors.email = 'Email is required';
+      newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(sanitizedEmail)) {
-      newErrors.email = 'Invalid email format';
+      newErrors.email = "Invalid email format";
     } else if (sanitizedEmail.length > 100) {
-      newErrors.email = 'Email too long';
+      newErrors.email = "Email too long";
     }
 
     if (!sanitizedPassword) {
-      newErrors.password = 'Password is required';
+      newErrors.password = "Password is required";
     } else if (sanitizedPassword.length < 6) {
-      newErrors.password = 'Minimum 6 characters required';
+      newErrors.password = "Minimum 6 characters required";
     } else if (sanitizedPassword.length > 64) {
-      newErrors.password = 'Password too long';
+      newErrors.password = "Password too long";
     } else if (commonPasswords.includes(sanitizedPassword)) {
-      newErrors.password = 'This password is too common. Please use a stronger one.';
+      newErrors.password =
+        "This password is too common. Please use a stronger one.";
     }
 
     setErrors(newErrors);
@@ -63,19 +65,25 @@ export default function Login() {
       setSubmissionError(error.message);
     } else {
       lastSubmitTimeRef.current = now;
-      setSuccessMessage('Logged in successfully!');
-      setTimeout(() => navigate('/dashboard'), 1000);
+      setSuccessMessage("Logged in successfully!");
+      setTimeout(() => navigate("/dashboard"), 1000);
     }
   };
 
   const inputWrapperStyles =
-    'flex items-center border rounded-2xl px-4 py-3 bg-transparent focus-within:ring-2 transition-all text-white';
-  const inputStyles = 'flex-1 bg-transparent outline-none text-white placeholder-white';
+    "flex items-center border rounded-2xl px-4 py-3 bg-transparent focus-within:ring-2 transition-all text-white";
+  const inputStyles =
+    "flex-1 bg-transparent outline-none text-white placeholder-white";
 
   return (
     <div className="min-h-screen bg-[#0d1b2a] flex items-center justify-center px-4">
-      <form onSubmit={handleSubmit} className="w-full max-w-md p-8 rounded-2xl text-[#ffffff]">
-        <h2 className="text-3xl font-bold text-center mb-6 text-[#ffffff]">Welcome</h2>
+      <form
+        onSubmit={handleSubmit}
+        className="w-full max-w-md p-8 rounded-2xl text-[#ffffff]"
+      >
+        <h2 className="text-3xl font-bold text-center mb-6 text-[#ffffff]">
+          Welcome
+        </h2>
 
         {/* Submission error */}
         {submissionError && (
@@ -93,8 +101,14 @@ export default function Login() {
 
         {/* Email */}
         <div className="mb-6">
-          <label htmlFor="email" className="block text-sm mb-2">Email</label>
-          <div className={`${inputWrapperStyles} ${errors.email ? 'border-[#ef233c]' : 'border-[#95D5B2]'} focus-within:ring-[#52B788]`}>
+          <label htmlFor="email" className="block text-sm mb-2">
+            Email
+          </label>
+          <div
+            className={`${inputWrapperStyles} ${
+              errors.email ? "border-[#ef233c]" : "border-[#95D5B2]"
+            } focus-within:ring-[#52B788]`}
+          >
             <FaUserAlt className="text-[#95D5B2] mr-3" />
             <input
               id="email"
@@ -107,7 +121,7 @@ export default function Login() {
             />
           </div>
           {errors.email && (
-            <FormHelperText style={{ color: '#ef233c', marginLeft: '0.25rem' }}>
+            <FormHelperText style={{ color: "#ef233c", marginLeft: "0.25rem" }}>
               {errors.email}
             </FormHelperText>
           )}
@@ -115,8 +129,14 @@ export default function Login() {
 
         {/* Password */}
         <div className="mb-6">
-          <label htmlFor="password" className="block text-sm mb-2">Password</label>
-          <div className={`${inputWrapperStyles} ${errors.password ? 'border-[#ef233c]' : 'border-[#95D5B2]'} focus-within:ring-[#52B788]`}>
+          <label htmlFor="password" className="block text-sm mb-2">
+            Password
+          </label>
+          <div
+            className={`${inputWrapperStyles} ${
+              errors.password ? "border-[#ef233c]" : "border-[#95D5B2]"
+            } focus-within:ring-[#52B788]`}
+          >
             <FaLock className="text-[#95D5B2] mr-3" />
             <input
               id="password"
@@ -129,7 +149,7 @@ export default function Login() {
             />
           </div>
           {errors.password && (
-            <FormHelperText style={{ color: '#ef233c', marginLeft: '0.25rem' }}>
+            <FormHelperText style={{ color: "#ef233c", marginLeft: "0.25rem" }}>
               {errors.password}
             </FormHelperText>
           )}
@@ -140,13 +160,27 @@ export default function Login() {
           className="w-full bg-[#52B788] text-[#081C15] py-3 rounded-full font-semibold hover:bg-[#40916C] transition-colors cursor-pointer"
         >
           Log In
-        </button> 
+        </button>
+        <div className="text-sm text-right mt-4 mb-6">
+          <Link to="/reset-password" className="text-[#95D5B2] hover:underline">
+            Forgot your password?
+          </Link>
+        </div>
 
         {/* Register redirect */}
         <div className="text-sm text-center mt-6">
           <span className="text-[#ffffff]">Don't have an account? </span>
           <Link to="/register" className="text-[#95D5B2] hover:underline">
             Sign up
+          </Link>
+        </div>
+        <div className="text-sm text-center mt-6">
+          <Link
+            to="/"
+            className="group text-[#95D5B2] hover:underline flex items-center justify-center"
+          >
+            <IoIosArrowRoundBack size={25} className="transition-transform duration-300 group-hover:-translate-x-1" />
+            Back to Home
           </Link>
         </div>
       </form>

@@ -11,7 +11,7 @@ export default function Profile() {
   const [loading, setLoading] = useState(false);
   const [mostrarModal, setMostrarModal] = useState(false);
 
-  // Obtener información del usuario actual
+  // Se obtiene la información del usuario actual
   useEffect(() => {
     getUserInfo();
   }, []);
@@ -112,7 +112,7 @@ export default function Profile() {
 
     console.log("Foto URL para actualizar perfil:", fotoUrl);
 
-    // Actualiza el perfil en la base de datos
+    // Se actualiza el perfil en la base de datos
     const { error } = await supabase.from("profiles").upsert({
       id: user.id,
       username,
