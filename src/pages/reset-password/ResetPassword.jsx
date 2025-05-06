@@ -2,38 +2,39 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../supabaseClient";
 import { FaUserAlt } from "react-icons/fa";
+import { FormHelperText } from "@mui/material";
 
 export default function ResetPassword() {
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [submissionError, setSubmissionError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [emailError, setEmailError] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     const lastSent = localStorage.getItem("lastResetEmail");
     if (lastSent && Date.now() - parseInt(lastSent) < 60000) {
-      setError("Please wait before requesting another reset email.");
+      setSubmissionError("Please wait before requesting another reset email.");
     }
   }, []);
 
   const handleReset = async (e) => {
     e.preventDefault();
-    setMessage("");
-    setError("");
+    setSuccessMessage("");
+    setSubmissionError("");
+    setEmailError("");
 
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setEmailError(true);
-      setError("Please enter a valid email address.");
+      setEmailError("Please enter a valid email address.");
       return;
-    } else {
-      setEmailError(false);
     }
 
     const lastSent = localStorage.getItem("lastResetEmail");
     if (lastSent && Date.now() - parseInt(lastSent) < 60000) {
-      setError("Please wait a minute before sending another reset email.");
+      setSubmissionError(
+        "Please wait a minute before sending another reset email."
+      );
       return;
     }
 
@@ -44,11 +45,11 @@ export default function ResetPassword() {
     });
 
     if (error) {
-      setError(error.message);
+      setSubmissionError(error.message);
       setLoading(false);
     } else {
       localStorage.setItem("lastResetEmail", Date.now().toString());
-      setMessage("Password reset link sent! Redirecting...");
+      setSuccessMessage("Password reset link sent! Redirecting...");
       setTimeout(() => {
         navigate("/login");
       }, 3000);
@@ -68,34 +69,49 @@ export default function ResetPassword() {
       >
         <h2 className="text-2xl font-bold text-center mb-6">Reset Password</h2>
 
-        {message && (
-          <div className="text-[#B7E4C7] mb-4 text-center">{message}</div>
-        )}
-        {error && (
-          <div className="text-[#ef233c] mb-4 text-center">{error}</div>
+        {/* Submission error */}
+        {submissionError && (
+          <div className="text-sm text-[#ef233c] text-center mb-4">
+            {submissionError}
+          </div>
         )}
 
-        <label htmlFor="email" className="block text-sm mb-2">
-          Email
-        </label>
-        <div
-          className={`${inputWrapperStyles} ${
-            emailError
-              ? "border-[#ef233c] focus-within:ring-[#ef233c]"
-              : "border-[#95D5B2] focus-within:ring-[#52B788]"
-          } mb-6`}
-        >
-          <FaUserAlt className="text-[#95D5B2] mr-3" />
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className={inputStyles}
-            placeholder="Enter your email"
-          />
+        {/* Success message */}
+        {successMessage && (
+          <div className="text-sm text-[#B7E4C7] text-center mb-4">
+            {successMessage}
+          </div>
+        )}
+
+        {/* Email input */}
+        <div className="mb-6">
+          <label htmlFor="email" className="block text-sm mb-2">
+            Email
+          </label>
+          <div
+            className={`${inputWrapperStyles} ${
+              emailError ? "border-[#ef233c]" : "border-[#95D5B2]"
+            } focus-within:ring-[#52B788]`}
+          >
+            <FaUserAlt className="text-[#95D5B2] mr-3" />
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className={inputStyles}
+              placeholder="Enter your email"
+              maxLength={100}
+            />
+          </div>
+          {emailError && (
+            <FormHelperText style={{ color: "#ef233c", marginLeft: "0.25rem" }}>
+              {emailError}
+            </FormHelperText>
+          )}
         </div>
 
+        {/* Submit button */}
         <button
           type="submit"
           disabled={loading}
